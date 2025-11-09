@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crown & Co Salon - Book Your Appointment</title>
     <style>
+        body.modal-open {
+            overflow: hidden;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -130,13 +134,15 @@
             z-index: 1000;
             overflow-y: auto;
             animation: fadeIn 0.3s ease-in;
+            padding: 20px;
         }
 
         .modal.active {
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding-top: 40px;
+            padding-bottom: 40px;
         }
 
         .modal-content {
@@ -144,9 +150,12 @@
             padding: 40px;
             max-width: 600px;
             width: 100%;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
             position: relative;
             border: 1px solid #333;
             animation: slideIn 0.3s ease-out;
+            margin: auto 0;
         }
 
         @keyframes slideIn {
@@ -568,7 +577,7 @@
             <h3 style="margin-bottom: 20px;">INFORMATION</h3>
             <p>📍 1875 Buford Highway, Cumming, GA 30041</p>
             <p>📞 470-412-7320</p>
-            <p>🕐 Monday - Saturday: 9:30 AM - 5:00 PM</p>
+            <p>🕒 Monday - Saturday: 9:30 AM - 5:00 PM</p>
         </div>
     </section>
 
@@ -912,12 +921,14 @@
         }
 
         function openBookingModal() {
+            document.body.classList.add('modal-open');
             document.getElementById('bookingModal').classList.add('active');
             loadServices();
             loadStylists();
         }
 
         function closeBookingModal() {
+            document.body.classList.remove('modal-open');
             document.getElementById('bookingModal').classList.remove('active');
             setTimeout(() => {
                 currentStep = 1;
@@ -934,10 +945,12 @@
         }
 
         function openContactModal() {
+            document.body.classList.add('modal-open');
             document.getElementById('contactModal').classList.add('active');
         }
 
         function closeContactModal() {
+            document.body.classList.remove('modal-open');
             document.getElementById('contactModal').classList.remove('active');
             setTimeout(() => {
                 document.getElementById('contactForm').reset();
